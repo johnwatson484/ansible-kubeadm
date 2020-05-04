@@ -1,0 +1,12 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: add helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+
+    - name: install nginx
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install nginx stable/nginx-ingress

@@ -55,5 +55,7 @@
         force: yes
     
     - name: install helm
+      become: yes
+      become_user: ubuntu
       shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
  
