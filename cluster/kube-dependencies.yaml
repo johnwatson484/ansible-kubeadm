@@ -53,4 +53,7 @@
         name: kubectl=1.18.0-00
         state: present
         force: yes
+    
+    - name: install helm
+      shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
  
