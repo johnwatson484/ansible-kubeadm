@@ -58,4 +58,19 @@
       become: yes
       become_user: ubuntu
       shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+    - name: add kubectl autocomplete
+      become: yes
+      become_user: ubuntu
+      shell: echo 'source <(kubectl completion bash)' >> ~/.bashrc
+
+    - name: add kubectl alias
+      become: yes
+      become_user: ubuntu
+      shell: echo 'alias k=kubectl' >> ~/.bashrc
+
+    - name: add kubectl alias autocomplete
+      become: yes
+      become_user: ubuntu
+      shell: echo 'complete -F __start_kubectl k' >> ~/.bashrc
  
