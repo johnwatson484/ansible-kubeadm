@@ -14,4 +14,4 @@
     - name: install nginx
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort,defaultBackend.service.type=NodePort --namespace services
+      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort --namespace services
