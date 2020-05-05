@@ -19,3 +19,8 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 
 ### Setup worker nodes
 `ansible-playbook -i ./cluster/hosts ./cluster/worker.yaml`
+
+## Create OpenVPN certificate file
+(As Ubuntu user)
+
+`~/openvpn/generate-key KEY_NAME services WORKER_NODE_IP openvpn`

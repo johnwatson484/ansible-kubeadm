@@ -37,3 +37,18 @@
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
+
+    - name: create .openvpn directory
+      become: yes
+      become_user: ubuntu
+      file:
+        path: $HOME/openvpn
+        state: directory
+        mode: 0755
+
+    - name: copy openvpn keygen to master
+      copy:
+        src: ../resources/generate-key
+        dest: /home/ubuntu/openvpn/generate-key
+        owner: ubuntu
+        mode: 0755
