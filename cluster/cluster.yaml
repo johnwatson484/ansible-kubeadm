@@ -1,6 +1,11 @@
 - hosts: master
   become: yes
   tasks:
+    - name: create service namespace
+      become: yes
+      become_user: ubuntu
+      shell: kubectl create namespace services
+
     - name: add helm repo
       become: yes
       become_user: ubuntu
@@ -9,4 +14,4 @@
     - name: install nginx
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install nginx stable/nginx-ingress
+      shell: helm upgrade --install nginx stable/nginx-ingress --namespace services
