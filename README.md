@@ -24,3 +24,6 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 (As Ubuntu user)
 
 `~/openvpn/generate-key KEY_NAME services WORKER_NODE_IP openvpn`
+
+`KEY_NAME` - name of `.ovpn` file to create  
+`WORKER_NODE_IP` - IP of worker node which will serve VPN access
