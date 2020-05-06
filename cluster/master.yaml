@@ -44,7 +44,7 @@
       file:
         path: $HOME/openvpn
         state: directory
-        mode: 0755
+        mode: 0755   
 
     - name: copy openvpn keygen to master
       copy:

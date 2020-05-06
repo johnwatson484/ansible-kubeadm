@@ -20,6 +20,16 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 ### Setup worker nodes
 `ansible-playbook -i ./cluster/hosts ./cluster/worker.yaml`
 
+### Create OpenVPN secrets (Optional)
+If existing OpenVPN certificates are present in `./resouces/openvpn-secrets` then the below will add them to a Kubernetes secret in the cluster.  
+`ansible-playbook -i ./cluster/hosts ./cluster/openvpn-secrets.yaml`
+
+### Install cluster services
+- NGINX ingress controller
+- OpenVPN  
+
+`ansible-playbook -i ./cluster/hosts ./cluster/cluster.yaml`
+
 ## Create OpenVPN certificate file
 (As Ubuntu user)
 

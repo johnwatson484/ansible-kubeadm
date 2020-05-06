@@ -24,4 +24,4 @@
     - name: install openvpn
       become: yes
       become_user: ubuntu
-      shell: helm install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort --namespace openvpn
+      shell: helm install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort,openvpn.keystoreSecret=openvpn-keystore-secret --namespace openvpn

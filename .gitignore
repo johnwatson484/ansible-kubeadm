@@ -1,0 +1,2 @@
+resources/openvpn-secrets/*
+!resources/openvpn-secrets/*.txt
