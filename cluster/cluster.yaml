@@ -1,10 +1,15 @@
 - hosts: master
   become: yes
   tasks:
-    - name: create service namespace
+    - name: create nginx namespace
       become: yes
       become_user: ubuntu
-      shell: kubectl create namespace services
+      shell: kubectl create namespace nginx
+
+    - name: create openvpn namespace
+      become: yes
+      become_user: ubuntu
+      shell: kubectl create namespace openvpn
 
     - name: add helm repo
       become: yes
@@ -14,9 +19,9 @@
     - name: install nginx
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort --namespace services
+      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort --namespace nginx
 
     - name: install openvpn
       become: yes
       become_user: ubuntu
-      shell: helm install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort --namespace services
+      shell: helm install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort --namespace openvpn
