@@ -4,14 +4,9 @@
     - name: create nginx namespace
       become: yes
       become_user: ubuntu
-      shell: kubectl create namespace nginx
+      shell: kubectl get namespaces nginx || kubectl create namespace nginx
 
-    - name: create openvpn namespace
-      become: yes
-      become_user: ubuntu
-      shell: kubectl create namespace openvpn
-
-    - name: add helm repo
+    - name: add stable helm repo
       become: yes
       become_user: ubuntu
       shell: helm repo add stable https://kubernetes-charts.storage.googleapis.com/
@@ -21,7 +16,12 @@
       become_user: ubuntu
       shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort --namespace nginx
 
+    - name: create openvpn namespace
+      become: yes
+      become_user: ubuntu
+      shell: kubectl get namespaces openvpn || kubectl create namespace openvpn
+
     - name: install openvpn
       become: yes
       become_user: ubuntu
-      shell: helm install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort,openvpn.keystoreSecret=openvpn-keystore-secret --namespace openvpn
+      shell: helm upgrade --install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort,openvpn.keystoreSecret=openvpn-keystore-secret --namespace openvpn
