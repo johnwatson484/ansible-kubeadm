@@ -27,3 +27,10 @@
       args:
         chdir: $HOME
         creates: node_joined.txt
+
+    - name: create storage directories
+      become: yes
+      file:
+        path: /mnt/disk/volume
+        state: directory
+        mode: 0777

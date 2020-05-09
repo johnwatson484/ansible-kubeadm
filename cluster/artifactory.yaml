@@ -1,0 +1,17 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: create artifactory namespace
+      become: yes
+      become_user: ubuntu
+      shell: kubectl get namespaces artifactory || kubectl create namespace artifactory
+
+    - name: add JFrog helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add jfrog https://charts.jfrog.io
+
+    - name: install artifactory
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install artifactory jfrog/artifactory-jcr --set artifactory.nginx.enabled=false,artifactory.ingress.enabled=true,ingress.hosts[0]=104.41.229.143,artifactory.artifactory.service.type=NodePort,artifactory.postgresql.enabled=false,postgresql.enabled=false,database.type=postgresql,database.driver=org.postgresql.Driver,database.url='jdbc:postgresql://40.112.75.40:5432/artifactory',database.user=artifactory,database.password=postgres --namespace artifactory
