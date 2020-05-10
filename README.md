@@ -49,10 +49,3 @@ If persistent storage is needed then configure default storage to use node files
 `kubectl create -f ./resources/configuration/persistentVolume.yaml`  
 
 Note: If not using VPN files will need to be copied to master node.
-
-### Artifactory (Optional)
-Note this is dependent on default storage and a postgres database.  
-
-Replace example postgres credentials in `./cluster/artifactory.yaml`
-
-`ansible-playbook -i ./cluster/hosts ./cluster/artifactory.yaml`
