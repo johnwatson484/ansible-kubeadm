@@ -7,7 +7,7 @@ spec:
     storage: 25Gi
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
     path: /mnt/disk/volume

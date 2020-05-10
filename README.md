@@ -20,18 +20,12 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 ### Setup worker nodes
 `ansible-playbook -i ./cluster/hosts ./cluster/worker.yaml`
 
-### Configure default storage (Optional)
-If persistent storage is needed then configure default storage to use node filesystem.  
-
-`kubectl create -f ./resources/configuration/storageClass.yaml`  
-
-`kubectl create -f ./resources/configuration/persistentVolume.yaml`  
-
-Note: If not using VPN files will need to be copied to master node.
-
 ### Create OpenVPN secrets (Optional)
 If existing OpenVPN certificates are present in `./resouces/openvpn-secrets` then the below will add them to a Kubernetes secret in the cluster.  
-`ansible-playbook -i ./cluster/hosts ./cluster/openvpn-secrets.yaml`
+
+`ansible-playbook -i ./cluster/hosts ./cluster/openvpn-secrets.yaml`  
+
+Note: using secrets will prevent future generation of certificates due to read only filesystem.
 
 ### Install cluster services
 - NGINX ingress controller
@@ -47,7 +41,16 @@ If existing OpenVPN certificates are present in `./resouces/openvpn-secrets` the
 `KEY_NAME` - name of `.ovpn` file to create  
 `WORKER_NODE_IP` - IP of worker node which will serve VPN access
 
-### Artifactory 
+### Configure default storage (Optional)
+If persistent storage is needed then configure default storage to use node filesystem.  
+
+`kubectl create -f ./resources/configuration/storageClass.yaml`  
+
+`kubectl create -f ./resources/configuration/persistentVolume.yaml`  
+
+Note: If not using VPN files will need to be copied to master node.
+
+### Artifactory (Optional)
 Note this is dependent on default storage and a postgres database.  
 
 Replace example postgres credentials in `./cluster/artifactory.yaml`
