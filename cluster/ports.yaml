@@ -17,7 +17,7 @@
 
     - name: enable ufw
       become: yes
-      shell: sudo ufw enable
+      shell: echo "y" | sudo ufw enable
 
 - hosts: workers
   become: yes
@@ -38,4 +38,4 @@
 
     - name: enable ufw
       become: yes
-      shell: sudo ufw enable
+      shell: echo "y" | sudo ufw enable
