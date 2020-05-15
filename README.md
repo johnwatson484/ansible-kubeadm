@@ -14,6 +14,9 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 ### Install Kubernetes dependencies on hosts
 `ansible-playbook -i ./cluster/hosts ./cluster/kube-dependencies.yaml`
 
+### Open required ports (If not managed firewall)
+`ansible-playbook -i ./cluster/hosts ./cluster/ports.yaml`
+
 ### Setup master nodes
 `ansible-playbook -i ./cluster/hosts ./cluster/master.yaml`
 

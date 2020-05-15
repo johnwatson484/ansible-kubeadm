@@ -1,0 +1,41 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: disable ufw
+      become: yes
+      shell: sudo ufw disable
+
+    - name: enable ports
+      become: yes
+      shell: |
+        sudo ufw allow http
+        sudo ufw allow https
+        sudo ufw allow ssh
+        sudo ufw allow 6443/tcp
+        sudo ufw allow 2379:2380/tcp
+        sudo ufw allow 10250:10252/tcp
+
+    - name: enable ufw
+      become: yes
+      shell: sudo ufw enable
+
+- hosts: workers
+  become: yes
+  tasks:
+    - name: disable ufw
+      become: yes
+      shell: sudo ufw disable
+
+    - name: enable ports
+      become: yes
+      shell: |
+        sudo ufw allow http
+        sudo ufw allow https
+        sudo ufw allow ssh
+        sudo ufw allow 6443/tcp
+        sudo ufw allow 10250/tc
+        sudo ufw allow 30000:30767/tcp
+
+    - name: enable ufw
+      become: yes
+      shell: sudo ufw enable
