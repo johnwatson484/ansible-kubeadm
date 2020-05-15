@@ -5,6 +5,10 @@
       become: yes
       shell: sudo ufw disable
 
+    - name: reset ufw
+      become: yes
+      shell: echo "y" | sudo ufw reset
+
     - name: enable ports
       become: yes
       shell: |
@@ -13,7 +17,7 @@
         sudo ufw allow ssh
         sudo ufw allow 6443/tcp
         sudo ufw allow 2379:2380/tcp
-        sudo ufw allow 10250:10252/tcp
+        sudo ufw allow 10250:10260/tcp
 
     - name: enable ufw
       become: yes
@@ -26,6 +30,10 @@
       become: yes
       shell: sudo ufw disable
 
+    - name: reset ufw
+      become: yes
+      shell: echo "y" | sudo ufw reset
+
     - name: enable ports
       become: yes
       shell: |
@@ -33,8 +41,8 @@
         sudo ufw allow https
         sudo ufw allow ssh
         sudo ufw allow 6443/tcp
-        sudo ufw allow 10250/tcp
-        sudo ufw allow 30000:32767/tcp
+        sudo ufw allow 10250:10260/tcp
+        sudo ufw allow 30000:60000/tcp
 
     - name: enable ufw
       become: yes
