@@ -33,7 +33,7 @@
         sudo ufw allow https
         sudo ufw allow ssh
         sudo ufw allow 6443/tcp
-        sudo ufw allow 10250/tc
+        sudo ufw allow 10250/tcp
         sudo ufw allow 30000:32767/tcp
 
     - name: enable ufw
