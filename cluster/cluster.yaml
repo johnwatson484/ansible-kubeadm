@@ -14,7 +14,7 @@
     - name: install nginx
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort --namespace nginx
+      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=NodePort,controller.service.nodePorts.http=30080,controller.service.nodePorts.https=30443 --namespace nginx
 
     - name: create openvpn namespace
       become: yes
