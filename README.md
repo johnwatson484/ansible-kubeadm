@@ -15,6 +15,8 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 `ansible-playbook -i ./cluster/hosts ./cluster/kube-dependencies.yaml`
 
 ### Open required ports (If not managed firewall)
+Update port IP addresses for nodes in `./cluster/ports.yaml`
+
 `ansible-playbook -i ./cluster/hosts ./cluster/ports.yaml`
 
 ### Setup master nodes
