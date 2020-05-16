@@ -3,6 +3,11 @@ Ansible playbooks for creating Kubeadm Kubernetes cluster
 
 ## Prerequisites
 - Ansible
+- at least three Ubuntu instances, one master and two worker nodes
+- IPv6 enabled
+- all ports open to all other nodes
+- port 22 and range 30000:32767 open to public
+
 
 ## Creating a cluster
 ### Update hosts file
