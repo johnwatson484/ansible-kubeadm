@@ -1,9 +1,9 @@
 [masters]
-master ansible_host=azure.master
+master ansible_host=master
 
 [workers]
-worker1 ansible_host=azure.worker1
-worker2 ansible_host=azure.worker2
+worker1 ansible_host=worker1
+worker2 ansible_host=worker2
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
