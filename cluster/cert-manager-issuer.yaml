@@ -1,0 +1,30 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: create cert-manager directory
+      become: yes
+      become_user: ubuntu
+      file:
+        path: $HOME/cert-manager
+        state: directory
+        mode: 0755
+
+    - name: copy issuer
+      copy:
+        src: ../resources/cert-manager/issuer.yaml
+        dest: /home/ubuntu/cert-manager/issuer.yaml
+        owner: ubuntu
+        mode: 0755    
+
+    - name: create cert-manager namespace
+      become: yes
+      become_user: ubuntu
+      shell: kubectl get namespaces cert-manager || kubectl create namespace cert-manager
+      
+    - name: create openvpn secrets
+      become: yes
+      become_user: ubuntu
+      shell: create -f /home/ubuntu/cert-manager/issuer.yaml
+
+
+

@@ -59,3 +59,8 @@ If persistent storage is needed then configure default storage to use node files
 `kubectl create -f ./resources/configuration/persistentVolume.yaml`  
 
 Note: If not using VPN files will need to be copied to master node.
+
+### Configure Certificate manager (Optional)
+If certificate authority required update email address and provider settings in `./resources/cert-manager/issuer.yaml`.  Example shows LetsEncrypt use.  
+
+`ansible-playbook -i ./cluster/hosts ./cluster/cert-manager-issuer.yaml`

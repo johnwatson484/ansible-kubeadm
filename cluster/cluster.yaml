@@ -25,3 +25,13 @@
       become: yes
       become_user: ubuntu
       shell: helm upgrade --install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort,openvpn.keystoreSecret=openvpn-keystore-secret --namespace openvpn
+
+    - name: create cert-manager namespace
+      become: yes
+      become_user: ubuntu
+      shell: kubectl get namespaces cert-manager || kubectl create namespace cert-manager
+
+    - name: install cert-manager
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
