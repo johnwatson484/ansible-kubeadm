@@ -21,7 +21,7 @@
       become_user: ubuntu
       shell: kubectl get namespaces cert-manager || kubectl create namespace cert-manager
       
-    - name: create openvpn secrets
+    - name: create cert-manager issuer
       become: yes
       become_user: ubuntu
       shell: create -f /home/ubuntu/cert-manager/issuer.yaml

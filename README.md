@@ -39,7 +39,8 @@ Note: using secrets will prevent future generation of certificates due to read o
 
 ### Install cluster services
 - NGINX ingress controller
-- OpenVPN  
+- OpenVPN
+- Cert Manager  
 
 `ansible-playbook -i ./cluster/hosts ./cluster/cluster.yaml`
 
