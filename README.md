@@ -65,3 +65,18 @@ Note: If not using VPN files will need to be copied to master node.
 If certificate authority required update email address and provider settings in `./resources/cert-manager/issuer.yaml`.  Example shows LetsEncrypt use.  
 
 `ansible-playbook -i ./cluster/hosts ./cluster/cert-manager-issuer.yaml`
+
+### Configure dashboard access
+Get token for dashboard access.  
+
+`kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')`  
+
+Add output token to kubeconfig file as below:  
+
+```
+users
+  - user:
+      token: TOKEN
+```
+
+To connect to dashboard, first proxy to local with `kubectl proxy` and navigate to http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
