@@ -39,4 +39,4 @@
     - name: install metrics server
       become: yes
       become_user: ubuntu
-      shell: kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
+      shell: helm upgrade --install metric-server stable/metrics-server --set args={--kubelet-insecure-tls} --namespace kube-system
