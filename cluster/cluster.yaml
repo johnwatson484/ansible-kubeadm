@@ -35,3 +35,8 @@
       become: yes
       become_user: ubuntu
       shell: kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+
+    - name: install metrics server
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install metric-server stable/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true --namespace kube-system
