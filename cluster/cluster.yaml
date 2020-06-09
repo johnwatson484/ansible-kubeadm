@@ -40,3 +40,14 @@
       become: yes
       become_user: ubuntu
       shell: helm upgrade --install metric-server stable/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true --namespace kube-system
+
+    - name: install dashboard
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+
+    - name: configure dashboard
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f ../resources/configuration/dashboard-adminuser.yaml
+    
