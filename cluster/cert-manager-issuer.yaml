@@ -24,7 +24,7 @@
     - name: create cert-manager issuer
       become: yes
       become_user: ubuntu
-      shell: create -f /home/ubuntu/cert-manager/issuer.yaml
+      shell: kubectl create -f /home/ubuntu/cert-manager/issuer.yaml
 
 
 
