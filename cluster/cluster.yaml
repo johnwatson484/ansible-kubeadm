@@ -51,3 +51,12 @@
       become_user: ubuntu
       shell: kubectl apply -f ../resources/configuration/dashboard-adminuser.yaml
     
+    - name: add descheduler helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add descheduler https://kubernetes-sigs.github.io/descheduler/
+
+    - name: install descheduler
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install descheduler --namespace kube-system descheduler/descheduler-helm-chart
