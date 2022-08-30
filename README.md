@@ -57,6 +57,8 @@ If persistent storage is needed then configure default storage to use node files
 
 `kubectl create -f ./resources/configuration/storageClass.yaml`  
 
+Replace `worker1` and `worker2` with actual Node name under values.  `kubectl get nodes` will display names.  
+
 `kubectl create -f ./resources/configuration/persistentVolume.yaml`  
 
 Note: If not using VPN files will need to be copied to master node.
