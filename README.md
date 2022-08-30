@@ -31,7 +31,7 @@ Update port IP addresses for nodes in `./cluster/ports.yaml`
 `ansible-playbook -i ./cluster/hosts ./cluster/worker.yaml`
 
 ### Create OpenVPN secrets (Optional)
-If existing OpenVPN certificates are present in `./resouces/openvpn-secrets` then the below will add them to a Kubernetes secret in the cluster.  
+If existing OpenVPN certificates are present in `./resources/openvpn-secrets` then the below will add them to a Kubernetes secret in the cluster.  
 
 `ansible-playbook -i ./cluster/hosts ./cluster/openvpn-secrets.yaml`  
 

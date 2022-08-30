@@ -1,30 +1,25 @@
 - hosts: master
   become: yes
   tasks:
-    - name: create nginx namespace
+    - name: add nginx helm repo
       become: yes
       become_user: ubuntu
-      shell: kubectl get namespaces nginx || kubectl create namespace nginx
-
-    - name: add stable helm repo
-      become: yes
-      become_user: ubuntu
-      shell: helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+      shell: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
     - name: install nginx
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install nginx stable/nginx-ingress --set controller.service.type=ClusterIP,controller.hostNetwork=true,controller.dnsPolicy=ClusterFirstWithHostNet,controller.kind=DaemonSet,controller.extraArgs.report-node-internal-ip-address=true --namespace nginx
+      shell: helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --set controller.service.type=ClusterIP,controller.hostNetwork=true,controller.dnsPolicy=ClusterFirstWithHostNet,controller.kind=DaemonSet,controller.extraArgs.report-node-internal-ip-address=true --namespace ingress-nginx --create-namespace
 
-    - name: create openvpn namespace
+    - name: add stable helm repo
       become: yes
       become_user: ubuntu
-      shell: kubectl get namespaces openvpn || kubectl create namespace openvpn
+      shell: helm repo add stable https://charts.helm.sh/stable
 
     - name: install openvpn
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort,openvpn.keystoreSecret=openvpn-keystore-secret --namespace openvpn
+      shell: helm upgrade --install openvpn stable/openvpn --set persistence.enabled=false,service.type=NodePort,openvpn.keystoreSecret=openvpn-keystore-secret --namespace openvpn --create-namespace
 
     - name: create cert-manager namespace
       become: yes
@@ -34,12 +29,17 @@
     - name: install cert-manager
       become: yes
       become_user: ubuntu
-      shell: kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+      shell: kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
+
+    - name: add metric server helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 
     - name: install metrics server
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install metric-server stable/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true --namespace kube-system
+      shell: helm upgrade --install metric-server metrics-server/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true --namespace kube-system
 
     - name: install dashboard
       become: yes
