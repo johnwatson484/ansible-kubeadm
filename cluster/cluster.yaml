@@ -51,6 +51,16 @@
       become_user: ubuntu
       shell: helm upgrade --install keda kedacore/keda --namespace keda --create-namespace
 
+    - name: add emberstack helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add emberstack https://emberstack.github.io/helm-charts
+
+    - name: install azure devops agent
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install azure-pipelines-agent emberstack/azure-pipelines-agent --set pipelines.pat.value=<PAT>,pipelines.url=https://dev.azure.com/<ORGANISATION>,pipelines.pool=Kubernetes
+
     - name: install dashboard
       become: yes
       become_user: ubuntu
