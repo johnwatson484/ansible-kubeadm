@@ -41,6 +41,16 @@
       become_user: ubuntu
       shell: helm upgrade --install metric-server metrics-server/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true --namespace kube-system
 
+    - name: add keda helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add kedacore https://kedacore.github.io/charts
+
+    - name: install keda
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install keda kedacore/keda --namespace keda --create-namespace
+
     - name: install dashboard
       become: yes
       become_user: ubuntu
