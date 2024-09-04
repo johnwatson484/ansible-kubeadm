@@ -70,3 +70,13 @@
       become: yes
       become_user: ubuntu
       shell: kubectl apply -f ../resources/configuration/dashboard-adminuser.yaml
+
+    - name: add infiscal helm repo
+      become: yes
+      become_user: ubuntu
+      shell: helm repo add infisical-helm-charts https://dl.cloudsmith.io/public/infisical/helm-charts/helm/charts/
+
+    - name: install infiscal
+      become: yes
+      become_user: ubuntu
+      shell: helm upgrade --install infiscal infisical-helm-charts/secrets-operator --namespace infiscal --create-namespace

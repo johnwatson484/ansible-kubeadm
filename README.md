@@ -82,3 +82,7 @@ users
 ```
 
 To connect to dashboard, first proxy to local with `kubectl proxy` and navigate to http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+## Setup Infiscal secrets manager (Optional)
+
+Create a machine identity in Infiscal and setup universal auth secret in cluster following the instructions in the [Infiscal documentation](https://infisical.com/docs/integrations/platforms/kubernetes#authentication-universalauth) 
