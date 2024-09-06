@@ -39,7 +39,7 @@
     - name: install metrics server
       become: yes
       become_user: ubuntu
-      shell: helm upgrade --install metric-server metrics-server/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true --namespace kube-system
+      shell: helm upgrade --install metric-server metrics-server/metrics-server --set args={--kubelet-insecure-tls\,--kubelet-preferred-address-types=InternalIP\,--metric-resolution=30s},hostNetwork.enabled=true,containerPort=4443 --namespace kube-system
 
     - name: add keda helm repo
       become: yes
