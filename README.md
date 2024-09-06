@@ -22,6 +22,8 @@ Amend host and worker IP addresses as appropriate in `./cluster/hosts`
 ### Open required ports (If not managed firewall)
 Update port IP addresses for nodes in `./cluster/ports.yaml`
 
+Optionally add Kubernetes API server port `6443` to `master` list to allow external access outside of VPN.
+
 `ansible-playbook -i ./cluster/hosts ./cluster/ports.yaml`
 
 ### Setup master nodes
