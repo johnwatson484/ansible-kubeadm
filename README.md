@@ -26,6 +26,12 @@ Optionally add Kubernetes API server port `6443` to `master` list to allow exter
 
 `ansible-playbook -i ./cluster/hosts ./cluster/ports.yaml`
 
+#### Cloudflare
+
+If using Cloudflare, use the alternative `ports-cloudflare.yaml` file to open the required ports for Cloudflare's proxy service. This will allow access to the Kubernetes API server and other services through Cloudflare.
+
+`ansible-playbook -i ./cluster/hosts ./cluster/ports-cloudflare.yaml`
+
 ### Setup master nodes
 `ansible-playbook -i ./cluster/hosts ./cluster/master.yaml`
 

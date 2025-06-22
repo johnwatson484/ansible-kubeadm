@@ -1,0 +1,47 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: disable ufw
+      shell: sudo ufw disable
+
+    - name: reset ufw
+      shell: echo "y" | sudo ufw reset
+
+    - name: enable ports
+      shell: |
+        sudo ufw allow ssh
+        sudo ufw allow from master
+        sudo ufw allow from worker1
+        sudo ufw allow from worker2
+
+    - name: enable ufw
+      shell: echo "y" | sudo ufw enable
+
+- hosts: workers
+  become: yes
+  tasks:
+    - name: disable ufw
+      shell: sudo ufw disable
+
+    - name: reset ufw
+      shell: echo "y" | sudo ufw reset
+
+    - name: allow SSH and internal traffic
+      shell: |
+        sudo ufw allow ssh
+        sudo ufw allow from master
+        sudo ufw allow from worker1
+        sudo ufw allow from worker2
+
+    - name: allow OpenVPN NodePort
+      shell: sudo ufw allow 32085/tcp
+
+    - name: allow ingress ports from Cloudflare
+      shell: |
+        for ip in $(curl https://www.cloudflare.com/ips-v4); do
+          sudo ufw allow from $ip to any port 80 proto tcp
+          sudo ufw allow from $ip to any port 443 proto tcp
+        done
+
+    - name: enable ufw
+      shell: echo "y" | sudo ufw enable
